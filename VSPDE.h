@@ -19,6 +19,7 @@
 #define _AVR_IO_H_
 #define _SFR_IO8(io_addr) ((io_addr))
 #include "C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\iomxx0_1.h"
+#include <WString.h>
 
 #define boolean bool
 
@@ -37,6 +38,7 @@
 
 #define INPUT 0x0
 #define OUTPUT 0x1
+#define INPUT_PULLUP 0x2
 
 #define PI 3.14159265
 #define HALF_PI 1.57079
@@ -68,11 +70,14 @@ public:
 
 	void println();
 	void println(char*);
-	void println(int,int);
-	void println(unsigned int,int);
-	void println(unsigned long,int);
+	void println(int,int=DEC);
+	void println(unsigned int,int=DEC);
+	void println(unsigned long,int=DEC);
+	void println(String);
 	int available();
 	char read();
+
+	operator bool() { return true; };
 
 	// VSPDE
 	void _append(char c);
@@ -81,11 +86,17 @@ private:
 	int buflen;
 };
 
-extern CSerial Serial;
+//extern CSerial Serial;
 extern unsigned long millis();
+extern unsigned long micros();
 extern void delay(unsigned long);
 extern void pinMode(int,int);
 extern void digitalWrite(int,int);
 extern bool digitalRead(int);
+extern void interrupts();
+extern int constrain(int,int,int);
+extern void attachInterrupt(int,void*,int);
+extern int digitalPinToInterrupt(int);
+extern void detachInterrupt(int);
 
 #endif

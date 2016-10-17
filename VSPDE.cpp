@@ -22,6 +22,11 @@ unsigned long millis()
 	return (clock() * 1000) /  CLOCKS_PER_SEC;
 }
 
+unsigned long micros()
+{
+	return (clock() * 1000 * 1000) /  CLOCKS_PER_SEC;
+}
+
 void delay(unsigned long delayms)
 {
 	unsigned long u = millis() + delayms;
@@ -89,6 +94,11 @@ void CSerial::println(unsigned int value, int)
 void CSerial::println(unsigned long value, int)
 {
 	printf("%lu\r\n", value);
+}
+
+void CSerial::println(String string)
+{
+	printf("%s\r\n", string);
 }
 
 
